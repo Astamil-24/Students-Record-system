@@ -1,24 +1,18 @@
-# main.py
-
 def add_student():
     name = input("Enter student name: ")
     roll = input("Enter roll number: ")
     marks = input("Enter marks: ")
-
     with open("students.txt", "a") as file:
-        file.write(f"{name},{roll},{marks}\n")
-    
+        file.write(f"{name},{roll},{marks}\n")    
     print(" Student added successfully!\n")
 
 def view_students():
     try:
         with open("students.txt", "r") as file:
             records = file.readlines()
-            
             if not records:
                 print(" No student records found.\n")
                 return
-
             print("\n Student Records:")
             print("-" * 30)
             for record in records:
@@ -27,17 +21,14 @@ def view_students():
                 print(f"Roll : {roll}")
                 print(f"Marks: {marks}")
                 print("-" * 30)
-
     except FileNotFoundError:
         print(" 'students.txt' file not found. Add students first.\n")
 
 def delete_student():
     roll_to_delete = input("Enter roll number of the student to delete: ")
     found = False
-
     with open("students.txt", "r") as file:
         lines = file.readlines()
-
     with open("students.txt", "w") as file:
         for line in lines:
             name, roll, marks = line.strip().split(",")
@@ -45,7 +36,6 @@ def delete_student():
                 file.write(line)
             else:
                 found = True
-
     if found:
         print(f" Student with Roll No {roll_to_delete} deleted successfully.\n")
     else:
@@ -53,10 +43,8 @@ def delete_student():
 def update_student():
     roll_to_update = input("Enter roll number of the student to update: ")
     found = False
-
     with open("students.txt", "r") as file:
         lines = file.readlines()
-
     with open("students.txt", "w") as file:
         for line in lines:
             name, roll, marks = line.strip().split(",")
@@ -66,14 +54,10 @@ def update_student():
                 found = True
             else:
                 file.write(line)
-
     if found:
         print(f" Student with Roll No {roll_to_update} updated successfully.\n")
     else:
         print(f" No student found with Roll No {roll_to_update}.\n")
-
-
-# 🔁 Main menu loop
 while True:
     print("\nStudent Record Management System")
     print("1. Add Student")
